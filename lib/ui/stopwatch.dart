@@ -69,7 +69,9 @@ class _ClockTimerState extends State<ClockTimer> {
       } else {
         _timer.cancel();
         // stopが押された後のページ遷移を記述
-      }
+
+      };
+
     });
   }
 
