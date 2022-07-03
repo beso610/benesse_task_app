@@ -1,4 +1,8 @@
+import 'video.dart';
 import 'package:flutter/material.dart';
+
+import 'calendar.dart';
+import 'home.dart';
 
 class InputTask extends StatelessWidget {
   const InputTask({Key? key}) : super(key: key);
@@ -49,6 +53,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool isChecked = true;
+
+  var sceneIndex = <Widget>[
+    Home(),
+    CalendarScreen(),
+    VideoScreen(),
+    InputTask(),
+  ];
 
 
   @override
@@ -202,7 +213,35 @@ class _MyHomePageState extends State<MyHomePage> {
         label: const Text('決定'),
         icon: const Icon(Icons.thumb_up),
         backgroundColor: Colors.teal[200],
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+    backgroundColor: Colors.green[50],
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.calendar_today),
+          label: 'Calendar',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.call),
+          label: 'Call',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.edit),
+          label: 'Input Task',
+        ),
+      ],
+      type: BottomNavigationBarType.fixed,
+      onTap: (int i){
+        if(i != 3) {
+          Navigator.push(context, MaterialPageRoute(
+              builder: (context) => sceneIndex[i]));
+        };
+      },
+    ),// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
