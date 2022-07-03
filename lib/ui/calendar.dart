@@ -7,9 +7,9 @@ import 'dart:collection';
 import 'home.dart';
 import 'input_task.dart';
 import 'video.dart';
+import 'data.dart';
 
 class CalendarScreen extends StatefulWidget {
-  static const String id = 'welcome_screen';
   @override
   _CalendarScreenState createState() => _CalendarScreenState();
 }
@@ -37,16 +37,29 @@ class _CalendarScreenState extends State<CalendarScreen> {
     _selectedDay = _focusedDay;
     //サンプルのイベントリスト
     _eventsList = {
-      //DateTime.now().subtract(Duration(days: 2)): ['数学 5p', '英語 5p'],
-      DateTime.now(): ['数学 5p', '英語 5p'],
-      DateTime.now().add(Duration(days: 1)): [
-        '数学 5p',
-        '英語 5p',
-        '物理 3p',
-        '化学 2p'
+      DateTime.now(): [
+        '国語 5p',
+        '化学 8p',
+        '数学 3p',
+        '英語 6p',
       ],
-      DateTime.now().add(Duration(days: 7)): [
-        '数学 10p'
+      DateTime.now().add(Duration(days: 1)): [
+        '国語 2p',
+        '化学 4p',
+        '数学 3p',
+        '英語 6p',
+      ],
+      DateTime.now().add(Duration(days: 2)): [
+        '国語 2p',
+        '物理 4p',
+        '数学 3p',
+      ],
+      DateTime.now().add(Duration(days: 3)): [
+        '日本史 2p',
+        '世界史 4p',
+        '数学 3p',
+        '物理 3p',
+        '生物 3p',
       ],
     };
   }
