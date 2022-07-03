@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'dart:collection';
 
+import 'home.dart';
+import 'input_task.dart';
+import 'video.dart';
+
 class CalendarScreen extends StatefulWidget {
   static const String id = 'welcome_screen';
   @override
@@ -15,6 +19,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
   DateTime? _selectedDay;
   Map<DateTime, List> _eventsList = {};
   CalendarFormat _calendarFormat = CalendarFormat.month;
+
+  var sceneIndex = <Widget>[
+    Home(),
+    CalendarScreen(),
+    VideoScreen(),
+    InputTask(),
+  ];
 
   int getHashCode(DateTime key) {
     return key.day * 1000000 + key.month * 10000 + key.year;
@@ -56,6 +67,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       appBar: AppBar(
         title: Text('魅力的なアプリ'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.teal[200],
       ),
       body: SafeArea(
@@ -109,6 +121,34 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.green[50],
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            label: 'Calendar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.call),
+            label: 'Call',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.edit),
+            label: 'Input Task',
+          ),
+        ],
+        type: BottomNavigationBarType.fixed,
+        onTap: (int i){
+          if(i != 1) {
+            Navigator.push(context, MaterialPageRoute(
+                builder: (context) => sceneIndex[i]));
+          };
+        },
       ),
     );
   }
