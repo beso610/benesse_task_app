@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home.dart';
 
 class InputProgress extends StatefulWidget {
   @override
@@ -72,7 +73,10 @@ class _InputProgressState extends State<InputProgress> {
                     onPrimary: Colors.white,
                     shape: const StadiumBorder(),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => Home()));
+                  },
                 ),
               ],
             )),

@@ -53,6 +53,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool isChecked = true;
+  var _controller1 = TextEditingController();
+  var _controller2 = TextEditingController();
+  var _controller3 = TextEditingController();
+  var _controller4 = TextEditingController();
+  var _controller5 = TextEditingController();
+  var _controller6 = TextEditingController();
 
   var sceneIndex = <Widget>[
     Home(),
@@ -92,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 70.0,
                   alignment: Alignment.centerRight,
                 ),
-                TextFieldConstructed(100.0),
+                TextFieldConstructed(100.0, _controller1),
               ],
             ),
           ),
@@ -107,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 70.0,
                   alignment: Alignment.centerRight,
                 ),
-                TextFieldConstructed(200.0),
+                TextFieldConstructed(200.0, _controller2),
               ],
             ),
           ),
@@ -122,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 70.0,
                   alignment: Alignment.centerRight,
                 ),
-                TextFieldConstructed(80.0),
+                TextFieldConstructed(80.0, _controller3),
                 Icon(
                   Icons.calendar_month ,     // Icons.○○にアイコン毎のワードを入れる
                   color: Colors.teal[300], // アイコンの色を設定できる
@@ -133,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 30.0,
                   alignment: Alignment.center,
                 ),
-                TextFieldConstructed(80.0),
+                TextFieldConstructed(80.0, _controller4),
                 Icon(
                   Icons.calendar_month ,     // Icons.○○にアイコン毎のワードを入れる
                   color: Colors.teal[300], // アイコンの色を設定できる
@@ -153,13 +159,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 70,
                   alignment: Alignment.centerRight,
                 ),
-                TextFieldConstructed(30.0),
+                TextFieldConstructed(30.0, _controller5),
                 Container(
                   child: Text('〜'),
                   width: 70.0,
                   alignment: Alignment.center,
                 ),
-                TextFieldConstructed(30.0),
+                TextFieldConstructed(30.0, _controller6),
                 Expanded(
                   flex: 3,
                   child: Column(
@@ -209,10 +215,21 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {print('決定');},
+        onPressed: () {
+          print('決定');
+        _controller1.clear();
+        _controller2.clear();
+        _controller3.clear();
+        _controller4.clear();
+        _controller5.clear();
+        _controller6.clear();
+        },
         label: const Text('決定'),
         icon: const Icon(Icons.thumb_up),
         backgroundColor: Colors.teal[200],
+
+
+
       ),
       bottomNavigationBar: BottomNavigationBar(
     backgroundColor: Colors.green[50],
@@ -249,12 +266,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
 Widget TextFieldConstructed(
     width_value,
+    _controller,
     )
 {
   return SizedBox(
     width: width_value,
     height: 20,
     child: TextField(
+      controller: _controller,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(

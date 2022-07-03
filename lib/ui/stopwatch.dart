@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'input_progress.dart';
 
 class ClockTimer extends StatefulWidget {
   @override
@@ -68,10 +69,9 @@ class _ClockTimerState extends State<ClockTimer> {
         _timer = Timer.periodic(Duration(seconds: 1), _onTimer);
       } else {
         _timer.cancel();
-        // stopが押された後のページ遷移を記述
-
-      };
-
+        Navigator.push(context, MaterialPageRoute(
+            builder: (context) => InputProgress()));
+      }
     });
   }
 
