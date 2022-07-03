@@ -17,6 +17,7 @@ class _VideoScreenState extends State<VideoScreen> {
   @override
   void initState() {
     super.initState();
+    /*
     _controller = VideoPlayerController.asset('assets/study_movie.MOV');
     _controller.initialize().then((_) {
       // 最初のフレームを描画するため初期化後に更新
@@ -27,6 +28,8 @@ class _VideoScreenState extends State<VideoScreen> {
       // 最初のフレームを描画するため初期化後に更新
       setState(() {});
     });
+
+     */
   }
   @override
   void dispose() {

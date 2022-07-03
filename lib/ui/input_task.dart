@@ -159,13 +159,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 70,
                   alignment: Alignment.centerRight,
                 ),
-                TextFieldConstructed(30.0, _controller5),
+                TextFieldConstructed(40.0, _controller5),
                 Container(
                   child: Text('〜'),
                   width: 70.0,
                   alignment: Alignment.center,
                 ),
-                TextFieldConstructed(30.0, _controller6),
+                TextFieldConstructed(50.0, _controller6),
                 Expanded(
                   flex: 3,
                   child: Column(
