@@ -206,19 +206,19 @@ class _HomeState extends State<Home> {
           backgroundColor: Colors.green[50],
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.home, color:Colors.blue,),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today),
+              icon: Icon(Icons.calendar_today, color: Colors.grey),
               label: 'Calendar',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.call),
+              icon: Icon(Icons.call, color: Colors.grey),
               label: 'Call',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.edit),
+              icon: Icon(Icons.edit, color: Colors.grey),
               label: 'Input Task',
             ),
           ],
