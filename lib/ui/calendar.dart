@@ -78,7 +78,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('魅力的なアプリ'),
+        title: Text('カレンダー'),
         centerTitle: true,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.teal[200],
