@@ -17,6 +17,7 @@ class _VideoScreenState extends State<VideoScreen> {
   @override
   void initState() {
     super.initState();
+    /*
     _controller = VideoPlayerController.asset('assets/study_movie.MOV');
     _controller.initialize().then((_) {
       // 最初のフレームを描画するため初期化後に更新
@@ -27,6 +28,8 @@ class _VideoScreenState extends State<VideoScreen> {
       // 最初のフレームを描画するため初期化後に更新
       setState(() {});
     });
+
+     */
   }
   @override
   void dispose() {
@@ -126,19 +129,19 @@ class _VideoScreenState extends State<VideoScreen> {
         backgroundColor: Colors.green[50],
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home, color: Colors.grey),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
+            icon: Icon(Icons.calendar_today, color: Colors.grey),
             label: 'Calendar',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.call),
+            icon: Icon(Icons.call, color:Colors.blue,),
             label: 'Call',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.edit),
+            icon: Icon(Icons.edit, color: Colors.grey),
             label: 'Input Task',
           ),
         ],
