@@ -1,3 +1,12 @@
+class Task {
+  DateTime date;
+  String subject; //教科
+  int max_page; //ページ総数 (１日あたり)
+  int progress_page; //現在進んでるページ
+
+  Task(this.date, this.subject, this.max_page, this.progress_page);
+}
+
 List<Task> todaystask =[
   Task(DateTime.now(), '国語', 5, 1),
   Task(DateTime.now(), '化学', 8, 0),
