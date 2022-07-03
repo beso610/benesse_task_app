@@ -82,8 +82,9 @@ class _VideoScreenState extends State<VideoScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: Image(
-                    image: AssetImage('images/study.jpeg'),
-                    height: 160.0,
+                    image: AssetImage('images/task_app3.jpg'),
+                    height: 180.0,
+                    width: 1000.0,
                   ),
                 ),
               ),
@@ -91,13 +92,13 @@ class _VideoScreenState extends State<VideoScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: Image(
-                    image: AssetImage('images/study.jpeg'),
-                    height: 160.0,
+                    image: AssetImage('images/task_app2.jpg'),
+                    height: 180.0,
                   ),
                 ),
               ),
               SizedBox(
-                height: 30.0,
+                height: 10.0,
               ),
               Container(
                 child: Center(
