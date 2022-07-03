@@ -17,6 +17,6 @@ void main() => runApp( new MaterialApp(
     '/video': (BuildContext context) => VideoScreen(),
     '/input_task': (BuildContext context) => InputTask(),
     '/stopwatch': (BuildContext context) => ClockTimer(),
-    '/input_done_task': (BuildContext context) => InputProgress(),
+    '/input_progress': (BuildContext context) => InputProgress(),
   },
 ));
