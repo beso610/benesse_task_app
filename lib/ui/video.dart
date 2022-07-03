@@ -46,7 +46,7 @@ class _VideoScreenState extends State<VideoScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('魅力的なアプリ'),
+        title: Text('通話画面'),
         centerTitle: true,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.teal[200],
@@ -57,18 +57,15 @@ class _VideoScreenState extends State<VideoScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: 40.0,
+                height: 20.0,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Icon(
                     Icons.videocam,
-                    size: 60.0,
+                    size: 50.0,
                     color: Colors.red[800],
-                  ),
-                  SizedBox(
-                    width: 20.0,
                   ),
                   Icon(
                     Icons.mic_off,
@@ -96,8 +93,8 @@ class _VideoScreenState extends State<VideoScreen> {
                   padding: const EdgeInsets.all(14.0),
                   child: Image(
                     image: AssetImage('images/task_app3.jpg'),
-                    height: 180.0,
-                    width: 1000.0,
+                    height: 150.0,
+                    //width: 1000.0,
                   ),
                 ),
               ),
@@ -106,12 +103,12 @@ class _VideoScreenState extends State<VideoScreen> {
                   padding: const EdgeInsets.all(14.0),
                   child: Image(
                     image: AssetImage('images/task_app2.jpg'),
-                    height: 180.0,
+                    height: 150.0,
                   ),
                 ),
               ),
               SizedBox(
-                height: 10.0,
+                height: 15.0,
               ),
               Container(
                 child: Center(
