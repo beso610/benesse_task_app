@@ -11,7 +11,7 @@ import 'package:benesse_task_app/ui/input_progress.dart';
 //}
 
 void main() => runApp( new MaterialApp(
-  home: InputTask(),
+  home: Home(),
   routes: <String, WidgetBuilder>{
     '/calendar': (BuildContext context) => CalendarScreen(),
     '/video': (BuildContext context) => VideoScreen(),
