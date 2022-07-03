@@ -9,7 +9,7 @@ import 'package:benesse_task_app/ui/video.dart';
 //}
 
 void main() => runApp( new MaterialApp(
-  home: Home(),
+  home: VideoScreen(),
   routes: <String, WidgetBuilder>{
     '/calendar': (BuildContext context) => CalendarScreen(),
     '/video': (BuildContext context) => VideoScreen(),
