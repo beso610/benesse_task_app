@@ -176,7 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           height: 30,
                           child: CheckboxListTile(
                           activeColor: Colors.teal[200],
-                          title: Text('ページ'),
+                          title: Text('p'),
                           controlAffinity: ListTileControlAffinity.leading,
                           value: isChecked,
                           onChanged: (value) {
