@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'calendar.dart';
 import 'input_task.dart';
+import 'stopwatch.dart';
 import 'video.dart';
 
 
@@ -30,12 +31,18 @@ class _HomeState extends State<Home> {
                                             );
     double iconSize = 50;
 
+
     var sceneIndex = <Widget>[
       Home(),
       CalendarScreen(),
       VideoScreen(),
       InputTask(),
     ];
+
+    _toStopWatch(){
+      Navigator.push(context, MaterialPageRoute(
+          builder: (context) => ClockTimer()));
+    };
 
 
     return Scaffold(
@@ -138,7 +145,9 @@ class _HomeState extends State<Home> {
                                           child: Text('家庭科',
                                               style: taskStyle),
                                         ),
-                                        Icon(Icons.play_arrow, size: iconSize),
+                                        InkWell(onTap: ()=> _toStopWatch(),
+                                          child: Icon(Icons.play_arrow, size: iconSize,),
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -168,13 +177,16 @@ class _HomeState extends State<Home> {
                                   Container(
                                     padding: EdgeInsets.only(left: 15),
                                     child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         SizedBox(
                                           width: 80,
                                           child: Text('数学',
                                               style: taskStyle),
                                         ),
-                                        Icon(Icons.play_arrow, size: iconSize),
+                                        InkWell(onTap: ()=> _toStopWatch(),
+                                          child: Icon(Icons.play_arrow, size: iconSize,),
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -210,7 +222,9 @@ class _HomeState extends State<Home> {
                                           child: Text('化学',
                                               style: taskStyle),
                                         ),
-                                        Icon(Icons.play_arrow, size: iconSize),
+                                    InkWell(onTap: ()=> _toStopWatch(),
+                                      child: Icon(Icons.play_arrow, size: iconSize,),
+                                    ),
                                       ],
                                     ),
                                   ),
@@ -246,7 +260,9 @@ class _HomeState extends State<Home> {
                                           child: Text('国語',
                                               style: taskStyle),
                                         ),
-                                        Icon(Icons.play_arrow, size: iconSize),
+                                        InkWell(onTap: ()=> _toStopWatch(),
+                                          child: Icon(Icons.play_arrow, size: iconSize,),
+                                        ),
                                       ],
                                     ),
                                   ),
