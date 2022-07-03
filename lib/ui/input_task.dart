@@ -6,6 +6,9 @@ class InputTask extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -20,7 +23,7 @@ class InputTask extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'タスク入力画面'),
+      home: const MyHomePage(title: 'タスク入力画面'),//, screenwidth: screenWidth),
     );
   }
 }
@@ -38,6 +41,7 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
+  //final double screenwidth;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -64,8 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Colors.teal[100],
       body: Container(
         padding: EdgeInsets.all(32.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
           children: <Widget>[
           Padding(
             padding: EdgeInsets.only(top: 20, right: 0, bottom: 20, left: 0),
@@ -136,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 Container(
                   child: Text('目標分量: 　'),
-                  width: 70.0,
+                  width: 70,
                   alignment: Alignment.centerRight,
                 ),
                 TextFieldConstructed(30.0),
