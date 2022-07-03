@@ -61,6 +61,7 @@ class _VideoScreenState extends State<VideoScreen> {
                   Icon(
                     Icons.mic_off,
                     size: 40.0,
+                    color: Colors.grey[400],
                   ),
                 ],
               ),
