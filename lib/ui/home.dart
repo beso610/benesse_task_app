@@ -14,8 +14,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<String> taskName = ["国語", "数学", "化学", "生物"];
-  List<double> taskProcess = [0.8, 0.3, 0.5, 0.4];
+  List<String> taskName = [];
+  List<double> taskProcess = [];
+  double allTaskProcess = 0;
 
   @override
   void initState(){
@@ -25,6 +26,7 @@ class _HomeState extends State<Home> {
       double _process = (todaystask[i].progress_page)/(todaystask[i].max_page);
       taskProcess.add(_process);
     }
+    allTaskProcess = (taskProcess.reduce((a,b)=>a+b))/(taskProcess.length);
   }
 
   @override
@@ -66,7 +68,9 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('魅力的なアプリ名', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+        title: Image.asset(
+          "images/title.png",
+        ),
         centerTitle: true,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.teal[200],
@@ -127,7 +131,7 @@ class _HomeState extends State<Home> {
                                   backgroundColor: Colors.grey,
                                   valueColor: new AlwaysStoppedAnimation<Color>(Colors.lightBlueAccent),
                                   minHeight: 30,
-                                  value: 0.8,
+                                  value: allTaskProcess,
                                 ),
                               ),
                             ),
