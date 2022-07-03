@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'dart:collection';
 
+import 'home.dart';
+import 'input_task.dart';
+import 'video.dart';
+import 'data.dart';
+
 class CalendarScreen extends StatefulWidget {
-  static const String id = 'welcome_screen';
   @override
   _CalendarScreenState createState() => _CalendarScreenState();
 }
@@ -15,6 +19,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
   DateTime? _selectedDay;
   Map<DateTime, List> _eventsList = {};
   CalendarFormat _calendarFormat = CalendarFormat.month;
+
+  var sceneIndex = <Widget>[
+    Home(),
+    CalendarScreen(),
+    VideoScreen(),
+    InputTask(),
+  ];
 
   int getHashCode(DateTime key) {
     return key.day * 1000000 + key.month * 10000 + key.year;
@@ -26,16 +37,29 @@ class _CalendarScreenState extends State<CalendarScreen> {
     _selectedDay = _focusedDay;
     //サンプルのイベントリスト
     _eventsList = {
-      //DateTime.now().subtract(Duration(days: 2)): ['数学 5p', '英語 5p'],
-      DateTime.now(): ['数学 5p', '英語 5p'],
-      DateTime.now().add(Duration(days: 1)): [
-        '数学 5p',
-        '英語 5p',
-        '物理 3p',
-        '化学 2p'
+      DateTime.now(): [
+        '国語 5p',
+        '化学 8p',
+        '数学 3p',
+        '英語 6p',
       ],
-      DateTime.now().add(Duration(days: 7)): [
-        '数学 10p'
+      DateTime.now().add(Duration(days: 1)): [
+        '国語 2p',
+        '化学 4p',
+        '数学 3p',
+        '英語 6p',
+      ],
+      DateTime.now().add(Duration(days: 2)): [
+        '国語 2p',
+        '物理 4p',
+        '数学 3p',
+      ],
+      DateTime.now().add(Duration(days: 3)): [
+        '日本史 2p',
+        '世界史 4p',
+        '数学 3p',
+        '物理 3p',
+        '生物 3p',
       ],
     };
   }
@@ -54,8 +78,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('魅力的なアプリ'),
+        title: Text('カレンダー'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.teal[200],
       ),
       body: SafeArea(
@@ -98,17 +123,46 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
 
               ),
-              ListView(
-                shrinkWrap: true,
-                children: getEventForDay(_selectedDay!)
-                    .map((event) => ListTile(
-                  title: Text(event.toString()),
-                ))
-                    .toList(),
-              )
+              Expanded(
+                child: ListView(
+                  children: getEventForDay(_selectedDay!)
+                      .map((event) => ListTile(
+                    title: Text(event.toString()),
+                  ))
+                      .toList(),
+                ),
+              ),
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.green[50],
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            label: 'Calendar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.call),
+            label: 'Call',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.edit),
+            label: 'Input Task',
+          ),
+        ],
+        type: BottomNavigationBarType.fixed,
+        onTap: (int i){
+          if(i != 1) {
+            Navigator.push(context, MaterialPageRoute(
+                builder: (context) => sceneIndex[i]));
+          };
+        },
       ),
     );
   }

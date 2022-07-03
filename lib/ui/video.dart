@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:video_player/video_player.dart';
 
+import 'calendar.dart';
+import 'home.dart';
+import 'input_task.dart';
+
 class VideoScreen extends StatefulWidget {
   @override
   _VideoScreenState createState() => _VideoScreenState();
@@ -30,6 +34,13 @@ class _VideoScreenState extends State<VideoScreen> {
     super.dispose();
   }
 
+  var sceneIndex = <Widget>[
+    Home(),
+    CalendarScreen(),
+    VideoScreen(),
+    InputTask(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +48,7 @@ class _VideoScreenState extends State<VideoScreen> {
       appBar: AppBar(
         title: Text('魅力的なアプリ'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.teal[200],
       ),
       body: SafeArea(
@@ -112,6 +124,34 @@ class _VideoScreenState extends State<VideoScreen> {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.green[50],
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            label: 'Calendar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.call),
+            label: 'Call',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.edit),
+            label: 'Input Task',
+          ),
+        ],
+        type: BottomNavigationBarType.fixed,
+        onTap: (int i){
+          if(i != 2) {
+            Navigator.push(context, MaterialPageRoute(
+                builder: (context) => sceneIndex[i]));
+          };
+        },
       ),
     );
   }

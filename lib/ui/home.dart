@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'data.dart';
+import 'calendar.dart';
+import 'input_task.dart';
+import 'stopwatch.dart';
+import 'video.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -8,6 +14,21 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<String> taskName = [];
+  List<double> taskProcess = [];
+  double allTaskProcess = 0;
+
+  @override
+  void initState(){
+    super.initState();
+    for (var i = 0; i < todaystask.length; i++) {
+      taskName.add(todaystask[i].subject);
+      double _process = (todaystask[i].progress_page)/(todaystask[i].max_page);
+      taskProcess.add(_process);
+    }
+    allTaskProcess = (taskProcess.reduce((a,b)=>a+b))/(taskProcess.length);
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -25,11 +46,33 @@ class _HomeState extends State<Home> {
                                             );
     double iconSize = 50;
 
+    var sceneIndex = <Widget>[
+      Home(),
+      CalendarScreen(),
+      VideoScreen(),
+      InputTask(),
+    ];
+
+
+
+
+
+
+    _toStopWatch(){
+      Navigator.push(context, MaterialPageRoute(
+          builder: (context) => ClockTimer()));
+    };
+
+    //起動時に別ファイルからタスクを取得
+
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('魅力的なアプリ名', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+        title: Image.asset(
+          "images/title.png",
+        ),
         centerTitle: true,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.teal[200],
       ),
       backgroundColor: Colors.white,
@@ -88,7 +131,7 @@ class _HomeState extends State<Home> {
                                   backgroundColor: Colors.grey,
                                   valueColor: new AlwaysStoppedAnimation<Color>(Colors.lightBlueAccent),
                                   minHeight: 30,
-                                  value: 0.8,
+                                  value: allTaskProcess,
                                 ),
                               ),
                             ),
@@ -103,157 +146,48 @@ class _HomeState extends State<Home> {
                     ),
                     //Taskの表示(スクロール可能)
                     Container(
-
                       child: Expanded(
-                        child: ListView(
-                          scrollDirection: Axis.vertical,
-                          children: <Widget>[
-                            //Task1
-                            Container(
-                              margin: EdgeInsets.all(10),
-                              width: size.width*0.8,
-                              height: size.height*0.15,
-                              decoration: taskTile,
-                              child:Column(
-                                children: <Widget>[
-                                  Container(
-                                    padding: EdgeInsets.only(left: 15),
-                                    child: Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 80,
-                                          child: Text('家庭科',
-                                              style: taskStyle),
-                                        ),
-                                        Icon(Icons.play_arrow, size: iconSize),
-                                      ],
-                                    ),
-                                  ),
-                                  //進捗バー
-                                  Container(
-                                    width: size.width*0.7,
-                                    child: ClipRRect(borderRadius: BorderRadius.all(Radius.circular(30)),
-                                      child: LinearProgressIndicator(
-                                        backgroundColor: Colors.grey,
-                                        valueColor: new AlwaysStoppedAnimation<Color>(Colors.lightBlueAccent),
-                                        minHeight: 30,
-                                        value: 0.9,
+                        child:ListView.builder(
+                          itemCount: taskName.length,
+                            itemBuilder: (BuildContext context, int i){
+                          return Container(
+                            margin: EdgeInsets.all(10),
+                            width: size.width*0.8,
+                            height: size.height*0.15,
+                            decoration: taskTile,
+                            child:Column(
+                              children: <Widget>[
+                                Container(
+                                  padding: EdgeInsets.only(left: 15),
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 80,
+                                        child: Text(taskName[i],
+                                            style: taskStyle),
                                       ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            //Task2
-                            Container(
-                              margin: EdgeInsets.all(10),
-                              width: size.width*0.8,
-                              height: size.height*0.15,
-                              decoration: taskTile,
-                              child:Column(
-                                children: <Widget>[
-                                  Container(
-                                    padding: EdgeInsets.only(left: 15),
-                                    child: Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 80,
-                                          child: Text('数学',
-                                              style: taskStyle),
-                                        ),
-                                        Icon(Icons.play_arrow, size: iconSize),
-                                      ],
-                                    ),
-                                  ),
-                                  //進捗バー
-                                  Container(
-                                    width: size.width*0.7,
-                                    child: ClipRRect(borderRadius: BorderRadius.all(Radius.circular(30)),
-                                      child: LinearProgressIndicator(
-                                        backgroundColor: Colors.grey,
-                                        valueColor: new AlwaysStoppedAnimation<Color>(Colors.lightBlueAccent),
-                                        minHeight: 30,
-                                        value: 0.1,
+                                      InkWell(onTap: ()=> _toStopWatch(),
+                                        child: Icon(Icons.play_arrow, size: iconSize,),
                                       ),
+                                    ],
+                                  ),
+                                ),
+                                //進捗バー
+                                Container(
+                                  width: size.width*0.7,
+                                  child: ClipRRect(borderRadius: BorderRadius.all(Radius.circular(30)),
+                                    child: LinearProgressIndicator(
+                                      backgroundColor: Colors.grey,
+                                      valueColor: new AlwaysStoppedAnimation<Color>(Colors.lightBlueAccent),
+                                      minHeight: 30,
+                                      value: taskProcess[i],
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                            //Task3
-                            Container(
-                              margin: EdgeInsets.all(10),
-                              width: size.width*0.8,
-                              height: size.height*0.15,
-                              decoration: taskTile,
-                              child:Column(
-                                children: <Widget>[
-                                  Container(
-                                    padding: EdgeInsets.only(left: 15),
-                                    child: Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 80,
-                                          child: Text('化学',
-                                              style: taskStyle),
-                                        ),
-                                        Icon(Icons.play_arrow, size: iconSize),
-                                      ],
-                                    ),
-                                  ),
-                                  //進捗バー
-                                  Container(
-                                    width: size.width*0.7,
-                                    child: ClipRRect(borderRadius: BorderRadius.all(Radius.circular(30)),
-                                      child: LinearProgressIndicator(
-                                        backgroundColor: Colors.grey,
-                                        valueColor: new AlwaysStoppedAnimation<Color>(Colors.lightBlueAccent),
-                                        minHeight: 30,
-                                        value: 0.3,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            //Task4
-                            Container(
-                              margin: EdgeInsets.all(10),
-                              width: size.width*0.8,
-                              height: size.height*0.15,
-                              decoration: taskTile,
-                              child:Column(
-                                children: <Widget>[
-                                  Container(
-                                    padding: EdgeInsets.only(left: 15),
-                                    child: Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 80,
-                                          child: Text('国語',
-                                              style: taskStyle),
-                                        ),
-                                        Icon(Icons.play_arrow, size: iconSize),
-                                      ],
-                                    ),
-                                  ),
-                                  //進捗バー
-                                  Container(
-                                    width: size.width*0.7,
-                                    child: ClipRRect(borderRadius: BorderRadius.all(Radius.circular(30)),
-                                      child: LinearProgressIndicator(
-                                        backgroundColor: Colors.grey,
-                                        valueColor: new AlwaysStoppedAnimation<Color>(Colors.lightBlueAccent),
-                                        minHeight: 30,
-                                        value: 0.5,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                          );
+                        })
                       ),
                     ),
                   ]
@@ -267,23 +201,35 @@ class _HomeState extends State<Home> {
 
 
         //ページ遷移ボタン
+
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.green[50],
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Setting',
-            ),
-            BottomNavigationBarItem(
               icon: Icon(Icons.calendar_today),
               label: 'Calendar',
             ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.call),
+              label: 'Call',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.edit),
+              label: 'Input Task',
+            ),
           ],
+          type: BottomNavigationBarType.fixed,
+          onTap: (int i){
+            if(i >0) {
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => sceneIndex[i]));
+            };
+          },
         ),
-      
       //child: Text("Hello"),
     );
   }

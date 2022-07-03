@@ -1,4 +1,8 @@
+import 'video.dart';
 import 'package:flutter/material.dart';
+
+import 'calendar.dart';
+import 'home.dart';
 
 class InputTask extends StatelessWidget {
   const InputTask({Key? key}) : super(key: key);
@@ -6,6 +10,9 @@ class InputTask extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -20,7 +27,7 @@ class InputTask extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'タスク入力画面'),
+      home: const MyHomePage(title: 'タスク入力画面'),//, screenwidth: screenWidth),
     );
   }
 }
@@ -38,6 +45,7 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
+  //final double screenwidth;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -45,6 +53,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool isChecked = true;
+  var _controller1 = TextEditingController();
+  var _controller2 = TextEditingController();
+  var _controller3 = TextEditingController();
+  var _controller4 = TextEditingController();
+  var _controller5 = TextEditingController();
+  var _controller6 = TextEditingController();
+
+  var sceneIndex = <Widget>[
+    Home(),
+    CalendarScreen(),
+    VideoScreen(),
+    InputTask(),
+  ];
 
 
   @override
@@ -64,8 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Colors.teal[100],
       body: Container(
         padding: EdgeInsets.all(32.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
           children: <Widget>[
           Padding(
             padding: EdgeInsets.only(top: 20, right: 0, bottom: 20, left: 0),
@@ -78,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 70.0,
                   alignment: Alignment.centerRight,
                 ),
-                TextFieldConstructed(100.0),
+                TextFieldConstructed(100.0, _controller1),
               ],
             ),
           ),
@@ -93,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 70.0,
                   alignment: Alignment.centerRight,
                 ),
-                TextFieldConstructed(200.0),
+                TextFieldConstructed(200.0, _controller2),
               ],
             ),
           ),
@@ -108,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 70.0,
                   alignment: Alignment.centerRight,
                 ),
-                TextFieldConstructed(80.0),
+                TextFieldConstructed(80.0, _controller3),
                 Icon(
                   Icons.calendar_month ,     // Icons.○○にアイコン毎のワードを入れる
                   color: Colors.teal[300], // アイコンの色を設定できる
@@ -119,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 30.0,
                   alignment: Alignment.center,
                 ),
-                TextFieldConstructed(80.0),
+                TextFieldConstructed(80.0, _controller4),
                 Icon(
                   Icons.calendar_month ,     // Icons.○○にアイコン毎のワードを入れる
                   color: Colors.teal[300], // アイコンの色を設定できる
@@ -136,16 +156,16 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 Container(
                   child: Text('目標分量: 　'),
-                  width: 70.0,
+                  width: 70,
                   alignment: Alignment.centerRight,
                 ),
-                TextFieldConstructed(30.0),
+                TextFieldConstructed(30.0, _controller5),
                 Container(
                   child: Text('〜'),
                   width: 70.0,
                   alignment: Alignment.center,
                 ),
-                TextFieldConstructed(30.0),
+                TextFieldConstructed(30.0, _controller6),
                 Expanded(
                   flex: 3,
                   child: Column(
@@ -195,11 +215,50 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {print('決定');},
+        onPressed: () {
+          print('決定');
+        _controller1.clear();
+        _controller2.clear();
+        _controller3.clear();
+        _controller4.clear();
+        _controller5.clear();
+        _controller6.clear();
+        },
         label: const Text('決定'),
         icon: const Icon(Icons.thumb_up),
         backgroundColor: Colors.teal[200],
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+
+
+
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+    backgroundColor: Colors.green[50],
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.calendar_today),
+          label: 'Calendar',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.call),
+          label: 'Call',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.edit),
+          label: 'Input Task',
+        ),
+      ],
+      type: BottomNavigationBarType.fixed,
+      onTap: (int i){
+        if(i != 3) {
+          Navigator.push(context, MaterialPageRoute(
+              builder: (context) => sceneIndex[i]));
+        };
+      },
+    ),// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
@@ -207,12 +266,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
 Widget TextFieldConstructed(
     width_value,
+    _controller,
     )
 {
   return SizedBox(
     width: width_value,
     height: 20,
     child: TextField(
+      controller: _controller,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
