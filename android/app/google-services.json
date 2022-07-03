@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "832493542359",
+    "project_id": "benesse-task-app",
+    "storage_bucket": "benesse-task-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832493542359:android:cf115763a3582390d34992",
+        "android_client_info": {
+          "package_name": "com.example.benesse_task_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "832493542359-djlsq7bph0odr1iv0iu7me75tjb7nblo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvWHuCqySOl0aLJJ6g1oW7q0TnVLtdB68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "832493542359-djlsq7bph0odr1iv0iu7me75tjb7nblo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
