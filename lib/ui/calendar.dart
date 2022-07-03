@@ -110,14 +110,15 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
 
               ),
-              ListView(
-                shrinkWrap: true,
-                children: getEventForDay(_selectedDay!)
-                    .map((event) => ListTile(
-                  title: Text(event.toString()),
-                ))
-                    .toList(),
-              )
+              Expanded(
+                child: ListView(
+                  children: getEventForDay(_selectedDay!)
+                      .map((event) => ListTile(
+                    title: Text(event.toString()),
+                  ))
+                      .toList(),
+                ),
+              ),
             ],
           ),
         ),
